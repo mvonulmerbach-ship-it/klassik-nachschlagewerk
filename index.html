@@ -13,133 +13,163 @@
 <meta name="apple-mobile-web-app-title" content="Klassik & Oper">
 <style>
 :root{--bg:#f7f6f2;--panel:#fff;--ink:#1c1b18;--muted:#6b6862;--line:#e7e4dc;
-  --brand:#3b6e58;--brandink:#fff;--soft:#eef0ee;--gold:#c79a2b;
+  --brand:#3b6e58;--brandink:#fff;--soft:#f0eee9;--hover:#f3f0fa;
   --shadow:0 8px 24px rgba(40,30,20,.07);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+[data-theme="dark"]{--bg:#15131a;--panel:#1d1a24;--ink:#ece8f1;--muted:#a49db4;--line:#322c3c;
+  --soft:#241f2e;--hover:#262031;--brandink:#fff;--shadow:0 8px 24px rgba(0,0,0,.4)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-text-size-adjust:100%}
-header{position:sticky;top:0;z-index:10;background:rgba(247,246,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.hd{max-width:920px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:20px;
-  background:linear-gradient(150deg,var(--brand),#0000),var(--brand);color:#fff;box-shadow:var(--shadow)}
-.ttl b{font-size:17px;font-weight:800}
-.ttl span{display:block;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
-.tabs button{font:inherit;font-size:13px;font-weight:600;color:var(--muted);background:transparent;border:1px solid transparent;border-radius:999px;padding:7px 14px;cursor:pointer}
-.tabs button.active{color:var(--brandink);background:var(--brand)}
-main{max-width:920px;margin:0 auto;padding:18px 16px 70px}
-.view{display:none}.view.active{display:block}
-.search{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:12px;padding:12px 15px;margin-bottom:14px}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.logo{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-size:19px;background:var(--brand);color:#fff;flex:0 0 auto}
+.ttl b{font-size:16px;font-weight:800;display:block;line-height:1.1}
+.ttl span{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.hd .sp{flex:1}
+.search{width:min(340px,42vw);font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:9px 13px}
 .search:focus{outline:none;border-color:var(--brand)}
-.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-.chip{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
-.chip.active{color:var(--brandink);background:var(--brand);border-color:transparent}
-.catblock{margin-bottom:26px}
-.catblock h2{font-size:20px;margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
-.catblock h2 .ic{margin-right:6px}
-.article{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:13px;padding:14px 18px;margin-bottom:14px;font-size:14.5px;color:#33312c}
-.article p{margin:0 0 9px}.article p:last-child{margin:0}.article b{color:var(--ink)}
-.factlabel{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:4px 0 8px}
-.entry{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow)}
-.entry .q{font-weight:700;font-size:15px}
-.entry .ans{margin-top:4px;font-size:14px}
-.entry .ans b2{}
-.entry .ans .lab{color:var(--brand);font-weight:700}
-.entry .fb{margin-top:6px;font-size:14px;color:#3a3833}
-.entry .fb b{color:var(--ink)}
-.count{color:var(--muted);font-size:13px;margin-bottom:14px}
-.src{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
-.src b{font-size:15px}
-.src p{margin:3px 0 0;color:var(--muted);font-size:14px}
-.lead{color:var(--muted);max-width:640px;margin:0 0 16px}
-.iframe-wrap{border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);background:var(--panel)}
-.iframe-wrap iframe{width:100%;height:78vh;border:0;display:block}
-.empty{color:var(--muted);padding:30px 0;text-align:center}
-footer{max-width:920px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:12px;text-align:center}
-@media(max-width:560px){.hd{padding:10px 12px}.tabs{margin-left:0;width:100%}main{padding:14px 12px 60px}}
+.iconbtn{background:var(--panel);border:1.5px solid var(--line);color:var(--ink);border-radius:10px;width:38px;height:38px;font-size:16px;cursor:pointer;flex:0 0 auto}
+.menubtn{display:none}
+.shell{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:0}
+aside{border-right:1px solid var(--line);padding:18px 10px 60px;height:calc(100vh - 58px);overflow:auto;position:sticky;top:58px}
+.cat{margin-bottom:4px}
+.cat>.catname{display:flex;align-items:center;gap:7px;width:100%;text-align:left;font:inherit;font-weight:700;font-size:14px;color:var(--ink);
+  background:none;border:none;cursor:pointer;padding:8px 10px;border-radius:8px}
+.cat>.catname:hover{background:var(--soft)}
+.cat>.catname .tw{margin-left:auto;color:var(--muted);font-size:11px;transition:.15s}
+.cat.collapsed .children{display:none}
+.cat.collapsed .tw{transform:rotate(-90deg)}
+.children{padding-left:6px}
+.subname{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);padding:8px 10px 3px}
+.alink{display:block;font:inherit;text-align:left;width:100%;background:none;border:none;color:var(--ink);cursor:pointer;
+  padding:6px 10px 6px 22px;border-radius:7px;font-size:13.5px;line-height:1.35}
+.alink:hover{background:var(--soft)}
+.alink.active{background:var(--brand);color:var(--brandink);font-weight:600}
+main{padding:26px 30px 80px;min-width:0;max-width:780px}
+.crumb{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.art h1{font-size:30px;margin:0 0 14px;line-height:1.15;font-weight:800}
+.art h2{font-size:21px;margin:26px 0 8px}
+.art h3{font-size:17px;margin:20px 0 6px}
+.art p{margin:0 0 13px}
+.art ul{margin:0 0 13px;padding-left:20px}.art li{margin-bottom:5px}
+.art a.ilink{color:var(--brand);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--brand) 35%,transparent);cursor:pointer}
+.art a.ilink:hover{border-bottom-color:var(--brand)}
+.lead{font-size:16.5px;color:var(--ink)}
+.box{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.seealso{margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.seealso b{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.seealso .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.seealso .chips a{font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--brand)}
+.aromaframe{width:100%;height:72vh;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.results .alink{padding-left:10px}
+.sidebackdrop{display:none}
+@media(max-width:820px){
+ .shell{grid-template-columns:1fr}
+ aside{position:fixed;top:0;left:0;bottom:0;width:280px;height:100vh;z-index:40;background:var(--panel);transform:translateX(-105%);transition:.25s;padding-top:16px}
+ aside.open{transform:none}
+ .sidebackdrop.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}
+ .menubtn{display:grid;place-items:center}
+ main{padding:20px 16px 70px}
+ .search{width:auto;flex:1}
+ .ttl{display:none}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="hd">
+    <button class="iconbtn menubtn" id="menubtn" aria-label="Menü">☰</button>
     <div class="logo" id="logo"></div>
     <div class="ttl"><b id="brand"></b><span>Nachschlagewerk</span></div>
-    <div class="tabs" id="tabs"></div>
+    <span class="sp"></span>
+    <input class="search" id="search" placeholder="Artikel suchen …">
+    <button class="iconbtn" id="themebtn" aria-label="Dark Mode">🌙</button>
   </div>
 </header>
-<main>
-  <section class="view active" id="v-look">
-    <input class="search" id="search" placeholder="Suchen … (Begriff, Antwort, Stichwort)">
-    <div class="chips" id="chips"></div>
-    <div class="count" id="count"></div>
-    <div id="list"></div>
-  </section>
-  <section class="view" id="v-aroma">
-    <p class="lead">Das interaktive Aromarad – klick dich durch Kategorien und Aromen.</p>
-    <div class="iframe-wrap"><iframe src="aromarad.html" title="Aromarad" loading="lazy"></iframe></div>
-  </section>
-  <section class="view" id="v-src">
-    <p class="lead">Wo findest du mehr? Empfehlenswerte, verlässliche Quellen zum Vertiefen.</p>
-    <div id="srclist"></div>
-  </section>
-</main>
-<footer id="foot"></footer>
+<div class="sidebackdrop" id="backdrop"></div>
+<div class="shell">
+  <aside id="side"></aside>
+  <main id="main"></main>
+</div>
 <script>
-const APP={"title": "Klassik & Oper", "brand": "Klas<b>sik</b>", "color": "#3f3a78", "ic": "🎼", "aroma": false, "order": ["Epochen & Stil", "Orchester & Instrumente", "Interpretation & Hören", "Oper: Die Musik", "Oper: Grundwissen", "Orchester & Dirigenten der Welt", "Glossar"], "icons": {"Epochen & Stil": "🏛️", "Orchester & Instrumente": "🎻", "Interpretation & Hören": "⭐", "Oper: Die Musik": "🎶", "Oper: Grundwissen": "🎭", "Orchester & Dirigenten der Welt": "🌍", "Glossar": "📖"}, "entries": [{"cat": "Epochen & Stil", "q": "Welche Epoche kommt direkt vor der Romantik?", "ans": "Wiener Klassik", "fb": "Barock → Klassik → Romantik → Moderne. Vor der Romantik liegt die Wiener Klassik."}, {"cat": "Epochen & Stil", "q": "Woran erkennt man typischerweise Barockmusik?", "ans": "Mehrere verwobene Stimmen &amp; Generalbass", "fb": "Polyphonie, durchlaufender Generalbass und Terrassendynamik sind Barock-Kennzeichen."}, {"cat": "Epochen & Stil", "q": "Was beschreibt die Sonatensatzform?", "ans": "Exposition – Durchführung – Reprise", "fb": "Die klassische Form: Themen werden vorgestellt, verarbeitet und kehren wieder."}, {"cat": "Epochen & Stil", "q": "Welcher Komponist gehört NICHT zur Wiener Klassik?", "ans": "Debussy", "fb": "Debussy ist ein Komponist der Moderne (Impressionismus)."}, {"cat": "Orchester & Instrumente", "q": "Welche Gruppe sitzt im Orchester ganz vorn?", "ans": "Streicher", "fb": "Die leisen, zahlreichen Streicher sitzen vorn; lautes Blech/Schlagwerk hinten."}, {"cat": "Orchester & Instrumente", "q": "Welches Instrument gehört zu den Holzbläsern?", "ans": "Oboe", "fb": "Oboe (mit Flöte, Klarinette, Fagott). Trompete/Posaune = Blech, Pauke = Schlagwerk."}, {"cat": "Orchester & Instrumente", "q": "Was macht der Konzertmeister?", "ans": "Stimmt ein &amp; ist Bindeglied zum Dirigenten", "fb": "Der/die erste Geiger(in) stimmt das Orchester ein und spielt Violin-Soli."}, {"cat": "Orchester & Instrumente", "q": "Was bedeutet „Pizzicato\"?", "ans": "Saiten zupfen statt streichen", "fb": "Pizzicato = die Saiten werden gezupft."}, {"cat": "Orchester & Instrumente", "q": "Welches ist ein Blechblasinstrument?", "ans": "Horn", "fb": "Horn, Trompete, Posaune und Tuba bilden das Blech."}, {"cat": "Interpretation & Hören", "q": "Was bedeutet „Rubato\"?", "ans": "Flexibles Dehnen des Tempos", "fb": "Rubato lässt die Musik durch feines Tempo-Spiel „atmen\"."}, {"cat": "Interpretation & Hören", "q": "Was ist KEIN Zeichen einer überzeugenden Interpretation?", "ans": "Durchweg gleich laut", "fb": "„Immer mittellaut\" ist eine Schwäche – gute Deutungen leben von Kontrast."}, {"cat": "Interpretation & Hören", "q": "Was meint „Intonation\"?", "ans": "Sauberkeit der Tonhöhe", "fb": "Intonation = wie sauber die Töne zueinander gestimmt sind."}, {"cat": "Interpretation & Hören", "q": "Wie schult man das Ohr am schnellsten?", "ans": "Zwei Aufnahmen derselben Stelle vergleichen", "fb": "Der direkte Vergleich macht Interpretations-Entscheidungen hörbar."}, {"cat": "Oper: Die Musik", "q": "Wonach werden Sängerstimmen eingeteilt?", "ans": "Nach Lage &amp; Klangfarbe (Stimmfach)", "fb": "Stimmfächer ordnen Stimmen wie Instrumente nach Lage und Timbre."}, {"cat": "Oper: Die Musik", "q": "Was ist ein „Leitmotiv\"?", "ans": "Wiederkehrendes Motiv für Person/Idee", "fb": "Wiederkehrendes musikalisches Motiv, berühmt durch Wagner."}, {"cat": "Oper: Die Musik", "q": "Was bedeutet „Koloratur\"?", "ans": "Schnelle virtuose Verzierungen der Stimme", "fb": "Koloraturen sind virtuose Läufe – glanzvoll v. a. im hohen Sopran."}, {"cat": "Oper: Die Musik", "q": "Welche Rolle spielt das Orchester in der Oper?", "ans": "Mit-Erzähler: trägt Stimmung, Spannung, Farbe", "fb": "Das Orchester kommentiert, treibt und malt – gleichberechtigt mit der Stimme."}, {"cat": "Oper: Die Musik", "q": "Worauf hörst du bei einer Arie vor allem?", "ans": "Auf Gesangslinie, Dynamik &amp; Zusammenspiel mit Orchester", "fb": "Musikalisch zählen Linie, Dynamik und das Stimme-Orchester-Zusammenspiel."}, {"cat": "Oper: Grundwissen", "q": "Was ist eine Ouvertüre?", "ans": "Das instrumentale Vorspiel", "fb": "Die Ouvertüre eröffnet die Oper instrumental."}, {"cat": "Oper: Grundwissen", "q": "Was ist ein Rezitativ?", "ans": "Sprechgesang, der die Handlung trägt", "fb": "Das Rezitativ treibt als Sprechgesang die Handlung voran."}, {"cat": "Oper: Grundwissen", "q": "Was ist ein Libretto?", "ans": "Der Text der Oper", "fb": "Das Libretto ist der Operntext."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wer ist Chefdirigent der Berliner Philharmoniker?", "ans": "Kirill Petrenko", "fb": "Kirill Petrenko leitet Berlin; Rattle war es früher."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Welches Orchester hat bewusst keinen festen Chefdirigenten?", "ans": "Wiener Philharmoniker", "fb": "Die Wiener Philharmoniker verwalten sich selbst."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Welcher junge Dirigent übernimmt ab 2027 Concertgebouw UND Chicago?", "ans": "Klaus Mäkelä", "fb": "Der Finne Klaus Mäkelä übernimmt beide Weltorchester."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wofür ist Herbert von Karajan berühmt?", "ans": "Den „Karajan-Sound&quot; der Berliner Philharmoniker", "fb": "Karajan prägte einen makellosen, samtigen Orchesterklang."}, {"cat": "Epochen & Stil", "q": "Woran erkennst du Barockmusik beim Hören?", "ans": "", "fb": "Mehrere gleichberechtigte Stimmen (Polyphonie), durchlaufender Generalbass, Terrassendynamik und oft ein hörbares Cembalo."}, {"cat": "Epochen & Stil", "q": "Was ist typisch für die Wiener Klassik?", "ans": "", "fb": "Klarheit und Balance: Melodie mit Begleitung, ebenmäßige „sprechende\" Phrasen, durchsichtiger Klang, Sonatensatzform."}, {"cat": "Epochen & Stil", "q": "Welche Merkmale hat romantische Musik?", "ans": "", "fb": "Große dynamische Bögen, Rubato, reiche Harmonik, Leitmotive und üppige Orchesterfarben – Gefühl und Erzählung stehen im Vordergrund."}, {"cat": "Epochen & Stil", "q": "Wie klingt die Moderne (20./21. Jh.)?", "ans": "", "fb": "Ungewohnte Klangfarben und Rhythmen, schwebende oder fehlende Tonart, scharfe Kontraste – Regeln werden neu erfunden."}, {"cat": "Epochen & Stil", "q": "Was bedeutet „Terrassendynamik\"?", "ans": "", "fb": "Lautstärke wechselt in Stufen (laut/leise) statt in fließenden Übergängen – typisch für den Barock."}, {"cat": "Epochen & Stil", "q": "Was ist die Sonatensatzform?", "ans": "", "fb": "Das klassische Bauprinzip: Exposition (Themen) – Durchführung (Verarbeitung) – Reprise (Wiederkehr)."}, {"cat": "Epochen & Stil", "q": "Nenne drei zentrale Barock-Komponisten.", "ans": "", "fb": "Johann Sebastian Bach, Georg Friedrich Händel und Antonio Vivaldi."}, {"cat": "Epochen & Stil", "q": "Welche drei Komponisten bilden die „Wiener Klassik\"?", "ans": "", "fb": "Joseph Haydn, Wolfgang Amadeus Mozart und Ludwig van Beethoven."}, {"cat": "Orchester & Instrumente", "q": "Welche vier Gruppen bilden das Sinfonieorchester?", "ans": "", "fb": "Streicher, Holzbläser, Blechbläser und Schlagwerk (oft ergänzt durch Harfe)."}, {"cat": "Orchester & Instrumente", "q": "Welche Instrumente gehören zu den Streichern?", "ans": "", "fb": "Violine (1. & 2.), Bratsche (Viola), Violoncello und Kontrabass."}, {"cat": "Orchester & Instrumente", "q": "Welche Instrumente zählen zu den Holzbläsern?", "ans": "", "fb": "Flöte, Oboe, Klarinette und Fagott."}, {"cat": "Orchester & Instrumente", "q": "Welche Instrumente sind Blechbläser?", "ans": "", "fb": "Horn, Trompete, Posaune und Tuba."}, {"cat": "Orchester & Instrumente", "q": "Warum sitzen die Streicher vorn und das Blech hinten?", "ans": "", "fb": "Die leisen, zahlreichen Streicher bilden das Fundament; lautes Blech und Schlagwerk sitzen hinten/höher, damit die Balance stimmt."}, {"cat": "Orchester & Instrumente", "q": "Was macht der Konzertmeister?", "ans": "", "fb": "Erste(r) Geiger(in): stimmt das Orchester ein, ist Bindeglied zum Dirigenten und spielt wichtige Violin-Soli."}, {"cat": "Orchester & Instrumente", "q": "Welche Rolle haben die Celli im Orchester?", "ans": "", "fb": "Singende Tenor-/Bassstimme – oft die schönsten melodischen Linien und ein warmes Klangfundament."}, {"cat": "Orchester & Instrumente", "q": "Was ist die Aufgabe des Dirigenten?", "ans": "", "fb": "Er gestaltet Tempo, Balance, Dynamik und die große Linie und gibt Einsätze – er formt die Interpretation, ist kein bloßer Taktgeber."}, {"cat": "Orchester & Instrumente", "q": "Was bedeutet „Pizzicato\"?", "ans": "", "fb": "Die Saiten werden mit den Fingern gezupft statt mit dem Bogen gestrichen."}, {"cat": "Orchester & Instrumente", "q": "Wofür sorgt die Pauke im Orchester?", "ans": "", "fb": "Für Rhythmus, Akzente und dramatische Schläge – sie ist oft der „Donner\" des Orchesters."}, {"cat": "Interpretation & Hören", "q": "Was bedeutet „Rubato\"?", "ans": "", "fb": "Das feine, ausdrucksvolle Dehnen und Drängen des Tempos – es lässt die Musik „atmen\"."}, {"cat": "Interpretation & Hören", "q": "Woran erkennst du eine gute Klangbalance?", "ans": "", "fb": "Die Hauptstimme ist klar hörbar, die Begleitung tritt zurück, und die Klangfarben mischen sich zu einem Ganzen."}, {"cat": "Interpretation & Hören", "q": "Was meint „Spannungsbogen\" in der Musik?", "ans": "", "fb": "Spannung wird über lange Strecken aufgebaut und gezielt gelöst – statt durchweg gleich laut zu bleiben."}, {"cat": "Interpretation & Hören", "q": "Was ist „Intonation\"?", "ans": "", "fb": "Die Sauberkeit der Tonhöhe – das genaue Stimmen der Töne zueinander."}, {"cat": "Interpretation & Hören", "q": "Was bedeutet „Phrasierung\"?", "ans": "", "fb": "Das Gliedern und Formen von Melodien in sinnvolle „Sätze\" – mit Betonungen, Bögen und Atempunkten."}, {"cat": "Interpretation & Hören", "q": "Was ist ein Zeichen einer SCHWACHEN Interpretation?", "ans": "", "fb": "Alles bleibt „mittellaut\" ohne echte Kontraste, das Tempo schleppt unmotiviert, Linien gehen im Klangbrei unter."}, {"cat": "Interpretation & Hören", "q": "Wie schult man am schnellsten das Ohr?", "ans": "", "fb": "Dieselbe Stelle in zwei oder drei Aufnahmen direkt hintereinander vergleichen – so hört man, was eine Entscheidung ist."}, {"cat": "Interpretation & Hören", "q": "Was bedeutet „Ensemble\" in Bezug auf Qualität?", "ans": "", "fb": "Wie präzise das Orchester zusammenspielt – Einsätze, Läufe und Pausen wie aus einem Guss, als wäre es ein Instrument."}, {"cat": "Interpretation & Hören", "q": "Was meint eine „Referenzaufnahme\"?", "ans": "", "fb": "Eine Einspielung, die über Jahrzehnte als Maßstab gilt – nicht die einzig „richtige\", aber eine besonders überzeugende."}, {"cat": "Oper: Die Musik", "q": "Wie werden Sängerstimmen eingeteilt?", "ans": "", "fb": "Nach Stimmfächern – nach Lage und Klangfarbe: Sopran, Mezzo/Alt (Frauen) und Tenor, Bariton, Bass (Männer). Die Stimme ist wie ein Instrument."}, {"cat": "Oper: Die Musik", "q": "Was zählt musikalisch bei einer Opernstimme?", "ans": "", "fb": "Wie bei einem Instrument: Intonation, Phrasierung, Dynamik, Atemführung und das Timbre (die Klangfarbe)."}, {"cat": "Oper: Die Musik", "q": "Welche Rolle spielt das Orchester in der Oper?", "ans": "", "fb": "Es trägt Stimmung, Spannung und Farbe, kommentiert und treibt die Handlung – ein gleichberechtigter Mit-Erzähler, nicht bloße Begleitung."}, {"cat": "Oper: Die Musik", "q": "Was ist ein „Leitmotiv\"?", "ans": "", "fb": "Ein wiederkehrendes musikalisches Motiv für eine Person, Idee oder Sache – berühmt durch Richard Wagner."}, {"cat": "Oper: Die Musik", "q": "Was bedeutet „Koloratur\"?", "ans": "", "fb": "Schnelle, virtuose Verzierungen und Läufe der Singstimme – besonders glanzvoll bei hohen Sopranpartien."}, {"cat": "Oper: Die Musik", "q": "Was meint „Belcanto\"?", "ans": "", "fb": "„Schöner Gesang\": ein Stil mit Betonung auf schöner, fließender Gesangslinie und Klangkultur (z. B. Bellini, Donizetti)."}, {"cat": "Oper: Die Musik", "q": "Worauf solltest du beim Hören einer Arie achten?", "ans": "", "fb": "Auf die Gesangslinie und Dynamik der Stimme und darauf, wie das Orchester mit ihr zusammenspielt – nicht primär auf die Bühnenhandlung."}, {"cat": "Oper: Die Musik", "q": "Was ist eine Arie – musikalisch betrachtet?", "ans": "", "fb": "Eine Solo-Nummer, in der die Handlung innehält und die Musik aufblüht: der lyrische, melodische Höhepunkt einer Figur."}, {"cat": "Oper: Die Musik", "q": "Warum gilt das Ensemble (mehrere Stimmen) oft als musikalischer Höhepunkt?", "ans": "", "fb": "Weil mehrere Stimmlinien gleichzeitig kunstvoll verwoben werden – ein klanglich besonders reicher, komplexer Moment."}, {"cat": "Oper: Grundwissen", "q": "Was ist eine Ouvertüre?", "ans": "", "fb": "Das instrumentale Vorspiel einer Oper – stimmt auf Stimmung und musikalische Themen ein."}, {"cat": "Oper: Grundwissen", "q": "Was ist ein Rezitativ?", "ans": "", "fb": "Sprechähnlicher Gesang, der die Handlung vorantreibt (der „Dialog\")."}, {"cat": "Oper: Grundwissen", "q": "Was ist ein Libretto?", "ans": "", "fb": "Der Text einer Oper."}, {"cat": "Oper: Grundwissen", "q": "Was bedeutet „Finale\" in der Oper?", "ans": "", "fb": "Der große Abschluss eines Aktes, in dem die Handlungsfäden – und oft viele Stimmen – zusammenlaufen."}, {"cat": "Oper: Grundwissen", "q": "Nenne zwei gute Einstiegsopern.", "ans": "", "fb": "Mozarts „Zauberflöte\" und Puccinis „La Bohème\" – eingängige Melodien, klare Handlung."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wer ist Chefdirigent der Berliner Philharmoniker?", "ans": "", "fb": "Kirill Petrenko."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Welches Spitzenorchester hat bewusst keinen festen Chefdirigenten?", "ans": "", "fb": "Die Wiener Philharmoniker – sie verwalten sich selbst und arbeiten mit Gastdirigenten."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Welcher Dirigent übernimmt ab 2027 Concertgebouw und Chicago?", "ans": "", "fb": "Klaus Mäkelä, der gefeierte junge finnische Dirigent."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wer wurde 2026 Musikdirektor der New Yorker Philharmoniker?", "ans": "", "fb": "Gustavo Dudamel (zuvor lange in Los Angeles)."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wer leitet seit 2023 das BR-Symphonieorchester München?", "ans": "", "fb": "Sir Simon Rattle."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Wofür ist Herbert von Karajan berühmt?", "ans": "", "fb": "Für den makellosen, samtigen „Karajan-Sound\" der Berliner Philharmoniker und seine prägende Schallplattenkultur."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Warum ist Carlos Kleiber legendär?", "ans": "", "fb": "Er dirigierte sehr selten, doch seine Beethoven-Sinfonien Nr. 5 & 7 zählen zu den meistgerühmten Aufnahmen überhaupt."}, {"cat": "Orchester & Dirigenten der Welt", "q": "Welche US-Orchester nennt man die „Big Five\"?", "ans": "", "fb": "Chicago, Boston, New York, Philadelphia und Cleveland."}, {"cat": "Glossar", "q": "Arie", "ans": "", "fb": "Solo-Gesangsstück; die Handlung hält inne und die Musik blüht auf."}, {"cat": "Glossar", "q": "Belcanto", "ans": "", "fb": "„Schöner Gesang\" – Stil mit Betonung auf fließender, schöner Gesangslinie."}, {"cat": "Glossar", "q": "Cembalo", "ans": "", "fb": "Barockes Tasteninstrument; Saiten werden gezupft statt angeschlagen."}, {"cat": "Glossar", "q": "Crescendo", "ans": "", "fb": "Allmähliches Lauterwerden (Gegenteil: Decrescendo)."}, {"cat": "Glossar", "q": "Dynamik", "ans": "", "fb": "Lautstärkegestaltung von leise (piano) bis laut (forte)."}, {"cat": "Glossar", "q": "Ensemble", "ans": "", "fb": "Mehrere Sänger/Musiker zugleich – oft musikalischer Höhepunkt."}, {"cat": "Glossar", "q": "Fuge", "ans": "", "fb": "Satzform, in der ein Thema von mehreren Stimmen nacheinander aufgegriffen wird."}, {"cat": "Glossar", "q": "Generalbass", "ans": "", "fb": "Barocke Bassbegleitung, über der Akkorde frei ausgefüllt werden."}, {"cat": "Glossar", "q": "Intonation", "ans": "", "fb": "Sauberkeit der Tonhöhe – das Stimmen der Töne zueinander."}, {"cat": "Glossar", "q": "Koloratur", "ans": "", "fb": "Schnelle, virtuose Verzierungen der Singstimme."}, {"cat": "Glossar", "q": "Konzertmeister", "ans": "", "fb": "Erste(r) Geiger(in); Bindeglied zwischen Orchester und Dirigent."}, {"cat": "Glossar", "q": "Leitmotiv", "ans": "", "fb": "Wiederkehrendes Motiv für Person/Idee (v. a. bei Wagner)."}, {"cat": "Glossar", "q": "Libretto", "ans": "", "fb": "Der Text einer Oper."}, {"cat": "Glossar", "q": "Ouvertüre", "ans": "", "fb": "Instrumentale Eröffnung einer Oper oder eines Werks."}, {"cat": "Glossar", "q": "Phrasierung", "ans": "", "fb": "Das Gliedern und Formen von Melodien in sinnvolle „Sätze\"."}, {"cat": "Glossar", "q": "Pizzicato", "ans": "", "fb": "Zupfen der Saiten statt Streichen mit dem Bogen."}, {"cat": "Glossar", "q": "Rezitativ", "ans": "", "fb": "Sprechähnlicher Gesang, der die Handlung vorantreibt."}, {"cat": "Glossar", "q": "Rubato", "ans": "", "fb": "Ausdrucksvolles, freies Dehnen und Drängen des Tempos."}, {"cat": "Glossar", "q": "Sinfonie", "ans": "", "fb": "Großes mehrsätziges Orchesterwerk, meist in vier Sätzen."}, {"cat": "Glossar", "q": "Stimmfach", "ans": "", "fb": "Kategorie einer Singstimme nach Lage und Klangfarbe."}, {"cat": "Glossar", "q": "Terrassendynamik", "ans": "", "fb": "Lautstärkewechsel in Stufen statt fließend – typisch Barock."}, {"cat": "Glossar", "q": "Timbre", "ans": "", "fb": "Die Klangfarbe einer Stimme oder eines Instruments."}, {"cat": "Glossar", "q": "Tutti", "ans": "", "fb": "Alle spielen zusammen (Gegenteil eines Soloparts)."}, {"cat": "Glossar", "q": "Vibrato", "ans": "", "fb": "Leichtes, regelmäßiges Schwanken der Tonhöhe für Wärme & Ausdruck."}], "sources": [["Gramophone", "gramophone.co.uk – Aufnahmen, Kritiken, Orchester-Rankings (englisch)."], ["The Oxford Dictionary of Music", "Standard-Nachschlagewerk zu Begriffen, Werken und Personen."], ["BR-Klassik", "br-klassik.de – Komponisten, Werke und Hörbeispiele auf Deutsch."], ["Bachtrack", "bachtrack.com – Konzerte, Rezensionen, Orchester-Übersichten."], ["Operabase", "operabase.com – Opern, Aufführungen und Häuser weltweit."]], "articles": {"Epochen & Stil": "<p>Die abendländische Kunstmusik gliedert sich grob in vier große Epochen. Der <b>Barock</b> (ca. 1600–1750) ist kontrapunktisch und verziert, mit gleichmäßigem Puls, Generalbass und Terrassendynamik (Bach, Händel, Vivaldi). Die <b>Wiener Klassik</b> (ca. 1750–1820) bringt Klarheit, Balance und die Sonatensatzform (Haydn, Mozart, Beethoven).</p>\n<p>Die <b>Romantik</b> (ca. 1820–1900) stellt Gefühl, Farbe und Erzählung in den Vordergrund, mit großem Orchester, kühnen Harmonien und Rubato (Brahms, Wagner, Tschaikowsky). Die <b>Moderne</b> (ab ca. 1900) bricht mit den Regeln – Impressionismus, Atonalität, Neoklassik und Minimal Music (Debussy, Strawinsky, Schostakowitsch).</p>", "Orchester & Instrumente": "<p>Das Sinfonieorchester ist nach <b>Klangfamilien</b> geordnet: <b>Streicher</b> (1./2. Violinen, Bratschen, Celli, Kontrabässe), <b>Holzbläser</b> (Flöte, Oboe, Klarinette, Fagott), <b>Blechbläser</b> (Horn, Trompete, Posaune, Tuba) und <b>Schlagwerk</b>, oft ergänzt durch Harfe.</p>\n<p>Die leisen, zahlreichen Streicher sitzen vorn im Halbrund, lautes Blech und Schlagwerk hinten – so bleibt die Balance gewahrt. Der <b>Konzertmeister</b> (erste Geige) stimmt das Orchester ein und ist Bindeglied zum <b>Dirigenten</b>, der Tempo, Balance, Dynamik und die große Linie gestaltet.</p>", "Interpretation & Hören": "<p>Zwei Orchester spielen dieselben Noten und klingen doch völlig verschieden. „Gut\" heißt nicht nur fehlerfrei, sondern <b>überzeugend</b>. Profis und Kritiker achten auf <b>Tempo & Puls</b>, <b>Dynamik & Spannungsbogen</b>, <b>Intonation</b> (Sauberkeit der Tonhöhe), <b>Ensemble</b> (Präzision des Zusammenspiels), <b>Phrasierung</b> und <b>Klangbalance</b>.</p>\n<p>Der schnellste Weg, das Ohr zu schulen, ist der <b>Vergleich</b>: dieselbe Stelle in zwei oder drei Aufnahmen direkt hintereinander hören. So wird hörbar, was eine künstlerische Entscheidung ist – und welche Deutung mehr packt.</p>", "Oper: Die Musik": "<p>In der Oper hören wir die <b>Stimme als Instrument</b>: Sänger werden nach <b>Stimmfächern</b> (Lage und Klangfarbe) eingeteilt – Sopran, Mezzo/Alt, Tenor, Bariton, Bass. Musikalisch zählen Intonation, Phrasierung, Dynamik und das <b>Timbre</b>.</p>\n<p>Das <b>Orchester</b> ist gleichberechtigter Mit-Erzähler: Es trägt Stimmung, Spannung und Farbe. Bei Wagner verknüpfen <b>Leitmotive</b> Klänge mit Personen und Ideen. Begriffe wie <b>Koloratur</b> (virtuose Verzierungen) und <b>Belcanto</b> (schöner Liniengesang) beschreiben Gesangsstile.</p>", "Oper: Grundwissen": "<p>Eine Oper folgt einem Bauplan: die <b>Ouvertüre</b> eröffnet instrumental, das <b>Rezitativ</b> trägt als Sprechgesang die Handlung, die <b>Arie</b> ist die lyrische Solo-Nummer, das <b>Ensemble</b> lässt mehrere Stimmen zugleich erklingen, das <b>Finale</b> bündelt die Fäden eines Akts.</p>\n<p>Der Text einer Oper heißt <b>Libretto</b>. Gute Einstiegswerke sind Mozarts „Zauberflöte\" und Puccinis „La Bohème\" – eingängige Melodien und klare Handlung erleichtern den Zugang.</p>", "Orchester & Dirigenten der Welt": "<p>Zur Weltspitze zählen u. a. das <b>Royal Concertgebouw</b> (Amsterdam), die <b>Berliner</b> und <b>Wiener Philharmoniker</b>, das <b>London Symphony Orchestra</b>, das BR-Symphonieorchester und die US-„Big Five\" (Chicago, Boston, New York, Philadelphia, Cleveland). Die Wiener Philharmoniker verwalten sich selbst und haben bewusst keinen Chefdirigenten.</p>\n<p>Prägende Dirigenten waren etwa <b>Karajan</b>, <b>Bernstein</b> und <b>Carlos Kleiber</b>. Heute leiten u. a. <b>Kirill Petrenko</b> (Berlin), <b>Gustavo Dudamel</b> (New York ab 2026) und <b>Simon Rattle</b> (München); <b>Klaus Mäkelä</b> übernimmt ab 2027 Concertgebouw und Chicago. (Stand 2026.)</p>", "Glossar": "<p>Hier findest du die wichtigsten <b>Fachbegriffe</b> kompakt erklärt – von Arie und Belcanto über Koloratur, Leitmotiv und Rubato bis Tutti und Vibrato. Nutze die Suche oben, um schnell einen Begriff nachzuschlagen.</p>"}};
-document.documentElement.style.setProperty('--brand',APP.color);
-const m=document.createElement('meta');m.name='theme-color';m.content=APP.color;document.head.appendChild(m);
+const APP={"title": "Klassik & Oper", "brand": "Klas<b>sik</b>", "color": "#3f3a78", "ic": "🎼", "articles": [{"slug": "epochen-stil", "title": "Epochen & Stil", "crumb": "Grundlagen", "body": "<p>Die abendländische Kunstmusik gliedert sich grob in vier große Epochen. Der <b>Barock</b> (ca. 1600–1750) ist kontrapunktisch und verziert, mit gleichmäßigem Puls, Generalbass und Terrassendynamik (Bach, Händel, Vivaldi). Die <b>Wiener Klassik</b> (ca. 1750–1820) bringt Klarheit, Balance und die Sonatensatzform (Haydn, Mozart, Beethoven).</p>\n<p>Die <b>Romantik</b> (ca. 1820–1900) stellt Gefühl, Farbe und Erzählung in den Vordergrund, mit großem Orchester, kühnen Harmonien und Rubato (Brahms, Wagner, Tschaikowsky). Die <b>Moderne</b> (ab ca. 1900) bricht mit den Regeln – Impressionismus, Atonalität, Neoklassik und Minimal Music (Debussy, Strawinsky, Schostakowitsch).</p>", "rel": ["glossar"]}, {"slug": "glossar", "title": "Glossar der Fachbegriffe", "crumb": "Grundlagen › Begriffe", "body": "<p>Hier findest du die wichtigsten <b>Fachbegriffe</b> kompakt erklärt – von Arie und Belcanto über Koloratur, Leitmotiv und Rubato bis Tutti und Vibrato. Nutze die Suche oben, um schnell einen Begriff nachzuschlagen.</p>", "rel": []}, {"slug": "orchester-instrumente", "title": "Orchester & Instrumente", "crumb": "Orchester & Aufführung", "body": "<p>Das Sinfonieorchester ist nach <b>Klangfamilien</b> geordnet: <b>Streicher</b> (1./2. Violinen, Bratschen, Celli, Kontrabässe), <b>Holzbläser</b> (Flöte, Oboe, Klarinette, Fagott), <b>Blechbläser</b> (Horn, Trompete, Posaune, Tuba) und <b>Schlagwerk</b>, oft ergänzt durch Harfe.</p>\n<p>Die leisen, zahlreichen Streicher sitzen vorn im Halbrund, lautes Blech und Schlagwerk hinten – so bleibt die Balance gewahrt. Der <b>Konzertmeister</b> (erste Geige) stimmt das Orchester ein und ist Bindeglied zum <b>Dirigenten</b>, der Tempo, Balance, Dynamik und die große Linie gestaltet.</p>", "rel": ["interpretation-hoeren", "welt"]}, {"slug": "interpretation-hoeren", "title": "Interpretation & Hören", "crumb": "Orchester & Aufführung", "body": "<p>Zwei Orchester spielen dieselben Noten und klingen doch völlig verschieden. „Gut\" heißt nicht nur fehlerfrei, sondern <b>überzeugend</b>. Profis und Kritiker achten auf <b>Tempo & Puls</b>, <b>Dynamik & Spannungsbogen</b>, <b>Intonation</b> (Sauberkeit der Tonhöhe), <b>Ensemble</b> (Präzision des Zusammenspiels), <b>Phrasierung</b> und <b>Klangbalance</b>.</p>\n<p>Der schnellste Weg, das Ohr zu schulen, ist der <b>Vergleich</b>: dieselbe Stelle in zwei oder drei Aufnahmen direkt hintereinander hören. So wird hörbar, was eine künstlerische Entscheidung ist – und welche Deutung mehr packt.</p>", "rel": ["orchester-instrumente", "welt"]}, {"slug": "welt", "title": "Orchester & Dirigenten der Welt", "crumb": "Orchester & Aufführung", "body": "<p>Zur Weltspitze zählen u. a. das <b>Royal Concertgebouw</b> (Amsterdam), die <b>Berliner</b> und <b>Wiener Philharmoniker</b>, das <b>London Symphony Orchestra</b>, das BR-Symphonieorchester und die US-„Big Five\" (Chicago, Boston, New York, Philadelphia, Cleveland). Die Wiener Philharmoniker verwalten sich selbst und haben bewusst keinen Chefdirigenten.</p>\n<p>Prägende Dirigenten waren etwa <b>Karajan</b>, <b>Bernstein</b> und <b>Carlos Kleiber</b>. Heute leiten u. a. <b>Kirill Petrenko</b> (Berlin), <b>Gustavo Dudamel</b> (New York ab 2026) und <b>Simon Rattle</b> (München); <b>Klaus Mäkelä</b> übernimmt ab 2027 Concertgebouw und Chicago. (Stand 2026.)</p>", "rel": ["orchester-instrumente", "interpretation-hoeren"]}, {"slug": "oper-musik", "title": "Oper: Die Musik", "crumb": "Oper", "body": "<p>In der Oper hören wir die <b>Stimme als Instrument</b>: Sänger werden nach <b>Stimmfächern</b> (Lage und Klangfarbe) eingeteilt – Sopran, Mezzo/Alt, Tenor, Bariton, Bass. Musikalisch zählen Intonation, Phrasierung, Dynamik und das <b>Timbre</b>.</p>\n<p>Das <b>Orchester</b> ist gleichberechtigter Mit-Erzähler: Es trägt Stimmung, Spannung und Farbe. Bei Wagner verknüpfen <b>Leitmotive</b> Klänge mit Personen und Ideen. Begriffe wie <b>Koloratur</b> (virtuose Verzierungen) und <b>Belcanto</b> (schöner Liniengesang) beschreiben Gesangsstile.</p>", "rel": ["oper-grund"]}, {"slug": "oper-grund", "title": "Oper: Grundwissen", "crumb": "Oper", "body": "<p>Eine Oper folgt einem Bauplan: die <b>Ouvertüre</b> eröffnet instrumental, das <b>Rezitativ</b> trägt als Sprechgesang die Handlung, die <b>Arie</b> ist die lyrische Solo-Nummer, das <b>Ensemble</b> lässt mehrere Stimmen zugleich erklingen, das <b>Finale</b> bündelt die Fäden eines Akts.</p>\n<p>Der Text einer Oper heißt <b>Libretto</b>. Gute Einstiegswerke sind Mozarts „Zauberflöte\" und Puccinis „La Bohème\" – eingängige Melodien und klare Handlung erleichtern den Zugang.</p>", "rel": ["oper-musik"]}, {"slug": "quellen", "title": "Quellen & Weiterlesen", "crumb": "Service", "body": "<p class=\"lead\">Wo du dein Wissen vertiefen kannst:</p>\n<ul><li><b>Gramophone</b> – gramophone.co.uk, Aufnahmen und Orchester-Rankings (englisch).</li>\n<li><b>The Oxford Dictionary of Music</b> – Standard-Nachschlagewerk.</li>\n<li><b>BR-Klassik</b> – br-klassik.de, Komponisten und Hörbeispiele auf Deutsch.</li>\n<li><b>Bachtrack</b> – bachtrack.com, Konzerte und Rezensionen.</li>\n<li><b>Operabase</b> – operabase.com, Opern und Häuser weltweit.</li></ul>", "rel": []}], "tree": [{"name": "Grundlagen", "ic": "🏛️", "slugs": ["epochen-stil"], "subs": [{"name": "Begriffe", "slugs": ["glossar"]}]}, {"name": "Orchester & Aufführung", "ic": "🎻", "slugs": ["orchester-instrumente", "interpretation-hoeren", "welt"], "subs": []}, {"name": "Oper", "ic": "🎭", "slugs": ["oper-musik", "oper-grund"], "subs": []}, {"name": "Service", "ic": "📚", "slugs": ["quellen"], "subs": []}]};
+var root=document.documentElement;
+// ---- theme ----
+function initTheme(){var p=new URLSearchParams(location.search).get('theme');var t;
+  if(p==='dark'||p==='light')t=p;else{try{t=localStorage.getItem('nsw_theme')||'light'}catch(e){t='light'}}
+  applyTheme(t);}
+function applyTheme(t){if(t==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+  document.getElementById('themebtn').textContent=(t==='dark')?'☀️':'🌙';curTheme=t;
+  // update any embedded aroma iframe
+  var af=document.querySelector('.aromaframe');if(af){var u=af.getAttribute('data-base');af.src=u+'?theme='+t;}}
+var curTheme='light';
+document.getElementById('themebtn').onclick=function(){var t=curTheme==='dark'?'light':'dark';try{localStorage.setItem('nsw_theme',t)}catch(e){}applyTheme(t);};
+// ---- index ----
+var BYSLUG={};APP.articles.forEach(function(a){BYSLUG[a.slug]=a;});
 document.title=APP.title+' – Nachschlagewerk';
 document.getElementById('brand').innerHTML=APP.brand;
 document.getElementById('logo').textContent=APP.ic;
-document.getElementById('foot').textContent=APP.title+' · Nachschlagewerk · '+APP.entries.length+' Einträge';
-// tabs
-const tabsDef=[['look','Nachschlagen']];
-if(APP.aroma)tabsDef.push(['aroma','Aromarad']);
-tabsDef.push(['src','Quellen']);
-const tabsEl=document.getElementById('tabs');
-tabsDef.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t[1];if(i===0)b.classList.add('active');
-  b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('v-'+t[0]).classList.add('active');window.scrollTo({top:0});};
-  tabsEl.appendChild(b);});
-// chips
-let activeCat='__all__';
-const chipsEl=document.getElementById('chips');
-function mkChip(label,val){const b=document.createElement('button');b.className='chip'+(val===activeCat?' active':'');b.textContent=label;
-  b.onclick=()=>{activeCat=val;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));b.classList.add('active');render();};return b;}
-chipsEl.appendChild(mkChip('Alle','__all__'));
-APP.order.forEach(c=>{const ic=APP.icons[c]?APP.icons[c]+' ':'';chipsEl.appendChild(mkChip(ic+c,c));});
-// render
-const strip=s=>(s||'').replace(/<[^>]+>/g,'');
-const searchEl=document.getElementById('search');
-function render(){
-  const q=searchEl.value.trim().toLowerCase();
-  const cats=activeCat==='__all__'?APP.order:[activeCat];
-  const list=document.getElementById('list');list.innerHTML='';
-  let total=0;
-  cats.forEach(cat=>{
-    let items=APP.entries.filter(e=>e.cat===cat);
-    if(q)items=items.filter(e=>(e.q+' '+strip(e.ans)+' '+strip(e.fb)).toLowerCase().includes(q));
-    if(!items.length)return;
-    total+=items.length;
-    const block=document.createElement('div');block.className='catblock';
-    const ic=APP.icons[cat]?'<span class="ic">'+APP.icons[cat]+'</span>':'';
-    const art=(APP.articles&&APP.articles[cat])?'<div class="article">'+APP.articles[cat]+'</div>':'';
-    block.innerHTML='<h2>'+ic+cat+'</h2>'+art+(items.length?'<div class="factlabel">Fakten &amp; Details</div>':'')+items.map(e=>{
-      let s='<div class="entry"><div class="q">'+e.q+'</div>';
-      if(e.ans)s+='<div class="ans"><span class="lab">Antwort:</span> '+e.ans+'</div>';
-      if(e.fb)s+='<div class="fb">'+e.fb+'</div>';
-      return s+'</div>';
-    }).join('');
-    list.appendChild(block);
+root.style.setProperty('--brand',APP.color);
+var meta=document.createElement('meta');meta.name='theme-color';meta.content=APP.color;document.head.appendChild(meta);
+// ---- sidebar ----
+function buildSidebar(){
+  var side=document.getElementById('side');side.innerHTML='';
+  APP.tree.forEach(function(c,ci){
+    var cat=document.createElement('div');cat.className='cat'+(ci>0?' collapsed':'');
+    var btn=document.createElement('button');btn.className='catname';btn.innerHTML=(c.ic?c.ic+' ':'')+c.name+'<span class="tw">▾</span>';
+    btn.onclick=function(){cat.classList.toggle('collapsed');};
+    cat.appendChild(btn);
+    var ch=document.createElement('div');ch.className='children';
+    (c.slugs||[]).forEach(function(s){ch.appendChild(mkA(s));});
+    (c.subs||[]).forEach(function(sub){
+      var sn=document.createElement('div');sn.className='subname';sn.textContent=sub.name;ch.appendChild(sn);
+      sub.slugs.forEach(function(s){ch.appendChild(mkA(s));});
+    });
+    cat.appendChild(ch);side.appendChild(cat);
   });
-  document.getElementById('count').textContent=total+' Einträge'+(q?' für „'+searchEl.value+'"':'')+(activeCat!=='__all__'?' in '+activeCat:'');
-  if(!total)list.innerHTML='<div class="empty">Nichts gefunden.</div>';
 }
-searchEl.addEventListener('input',render);
-// sources
-document.getElementById('srclist').innerHTML=APP.sources.map(s=>'<div class="src"><b>'+s[0]+'</b><p>'+s[1]+'</p></div>').join('');
-render();
+function mkA(slug){var a=BYSLUG[slug];var b=document.createElement('button');b.className='alink';b.dataset.s=slug;b.textContent=a?a.title:slug;b.onclick=function(){go(slug);closeSide();};return b;}
+// ---- article render ----
+function go(slug){
+  var a=BYSLUG[slug];if(!a){a=APP.articles[0];slug=a.slug;}
+  if(location.hash!=='#'+slug)history.replaceState(null,'','#'+slug);
+  document.querySelectorAll('.alink').forEach(function(x){x.classList.toggle('active',x.dataset.s===slug);});
+  // expand the cat containing it
+  var m=document.getElementById('main');
+  var sa=relatedChips(slug);
+  m.innerHTML='<div class="crumb">'+a.crumb+'</div><article class="art"><h1>'+a.title+'</h1>'+a.body+sa+'</article>';
+  m.scrollTop=0;window.scrollTo(0,0);
+  // wire internal links
+  m.querySelectorAll('a.ilink').forEach(function(l){l.onclick=function(e){e.preventDefault();go(l.dataset.s);};});
+  m.querySelectorAll('.seealso a').forEach(function(l){l.onclick=function(e){e.preventDefault();go(l.dataset.s);};});
+}
+function relatedChips(slug){
+  var a=BYSLUG[slug];if(!a.rel||!a.rel.length)return '';
+  var c=a.rel.map(function(s){var t=BYSLUG[s];return t?'<a data-s="'+s+'">'+t.title+'</a>':'';}).join('');
+  return '<div class="seealso"><b>Siehe auch</b><div class="chips">'+c+'</div></div>';
+}
+// ---- search ----
+function strip(s){return (s||'').replace(/<[^>]+>/g,' ');}
+document.getElementById('search').addEventListener('input',function(e){
+  var q=e.target.value.trim().toLowerCase();
+  if(!q){var h=location.hash.slice(1);go(BYSLUG[h]?h:APP.articles[0].slug);return;}
+  var hits=APP.articles.filter(function(a){return (a.title+' '+strip(a.body)).toLowerCase().indexOf(q)>-1;}).slice(0,40);
+  var m=document.getElementById('main');
+  m.innerHTML='<div class="crumb">Suche</div><h1 class="art" style="font-size:24px;margin:0 0 14px">'+hits.length+' Treffer für „'+e.target.value+'"</h1><div class="results"></div>';
+  var box=m.querySelector('.results');
+  hits.forEach(function(a){var b=document.createElement('button');b.className='alink';b.dataset.s=a.slug;b.textContent=a.title;b.onclick=function(){go(a.slug);};box.appendChild(b);});
+  if(!hits.length)m.querySelector('.results').innerHTML='<p class="muted">Nichts gefunden.</p>';
+});
+// ---- mobile ----
+function closeSide(){document.getElementById('side').classList.remove('open');document.getElementById('backdrop').classList.remove('open');}
+document.getElementById('menubtn').onclick=function(){document.getElementById('side').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');};
+document.getElementById('backdrop').onclick=closeSide;
+// ---- init ----
+initTheme();buildSidebar();
+var start=location.hash.slice(1);go(BYSLUG[start]?start:APP.articles[0].slug);
+window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(h&&BYSLUG[h])go(h);});
 </script>
 </body>
 </html>
